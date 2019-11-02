@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Feedback;
+use App\Events\FeedbackReceived;
 
 class FeedbackController extends Controller
 {
@@ -27,6 +28,9 @@ class FeedbackController extends Controller
         foreach ($words as $key => $word) {
             $this->createOrIncrement($word);
         }
+
+        $data = json_decode($this->getData());
+        broadcast(new FeedbackReceived($data));
 
         return response()->json('ok');
     }

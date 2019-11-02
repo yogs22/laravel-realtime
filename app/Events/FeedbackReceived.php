@@ -19,9 +19,14 @@ class FeedbackReceived
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->payload = $data;
+    }
+
+    public function broadcastWith()
+    {
+        return $this->payload;
     }
 
     /**
@@ -31,6 +36,6 @@ class FeedbackReceived
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('feedback-received');
     }
 }
