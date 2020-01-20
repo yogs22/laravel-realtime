@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix', 'api/v1'], function () {
+Route::get('feedback/create', 'FeedbackController@create');
+Route::get('feedback/dashboard', 'FeedbackController@dashboard');
+
+Route::group(['prefix' => 'api/v1'], function () {
+    Route::get('feedback/data', 'FeedbackController@dashboardData');
     Route::post('feedback', 'FeedbackController@store');
 });

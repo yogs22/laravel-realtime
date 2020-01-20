@@ -10,7 +10,7 @@ class FeedbackController extends Controller
 {
     public function store(Request $request)
     {
-        $words = $request('words');
+        $words = request('words');
 
         if (strpos($words, ',') != false) {
             return response()->json([
@@ -19,7 +19,7 @@ class FeedbackController extends Controller
         }
 
         $words = explode(" ", $words);
-        if (count($word) > 3) {
+        if (count($words) > 3) {
             return response()->json([
                 'message' => 'Tidak boleh lebih dari 3 kata'
             ], 400);
@@ -59,7 +59,7 @@ class FeedbackController extends Controller
         return view('create');
     }
 
-    public function createOrIncrement()
+    public function createOrIncrement(String $word)
     {
         $word = strtolower($word);
 
