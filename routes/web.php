@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('feedback/create', 'FeedbackController@create');
+Route::get('feedback/create', 'FeedbackController@create')->name('feedback');
 Route::get('feedback/dashboard', 'FeedbackController@dashboard');
+
+Route::get('qr-code', 'QrCodeController@index');
 
 Route::group(['prefix' => 'api/v1'], function () {
     Route::get('feedback/data', 'FeedbackController@dashboardData');
